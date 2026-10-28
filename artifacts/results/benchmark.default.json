@@ -1,0 +1,9 @@
+{
+  "config": "rrf-all+route-bm25",
+  "chunks": 22739,
+  "load_s": 4.6,
+  "query_ms_p50": 165.0,
+  "query_ms_p95": 197.9,
+  "vectors_mb_on_disk": 25.8,
+  "peak_rss_mb": 947
+}
