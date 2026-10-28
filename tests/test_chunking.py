@@ -60,3 +60,6 @@ def test_doc_title_from_file_name():
     assert chunking.doc_title("maud/Slack Technologies, Inc._salesforce.com, inc..txt") == \
         "Slack Technologies, Inc. salesforce.com, inc."
     assert chunking.doc_title("maud/Grubhub Inc._Just Eat.pdf||Grubhub Amendment No. 1.txt") == "Grubhub Inc. Just Eat"
+    assert chunking.doc_title("contractnli/VELCO%20NDA%20rev0.txt") == "VELCO NDA rev0"
+    assert chunking.doc_title("contractnli/ExcelerateStandardNDAFormat.txt") == "Excelerate Standard NDA Format"
+    assert chunking.doc_title("contractnli/Kenway-NDA-Form-Blank.txt") == "Kenway NDA Form Blank"

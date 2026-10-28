@@ -61,7 +61,7 @@ def main() -> None:
                                     ("sparse", enc.encode_sparse, encode.SPARSE_MODEL)):
                 t = time.time()
                 vecs = fn(texts, batch_size=batch[kind])
-                encode.save(name, kind, vecs, encode.fingerprint(chunks, model, variant))
+                encode.save(name, kind, vecs, encode.fingerprint(texts, model))
                 log[f"{name}.{kind}"] = {"chunks": len(chunks), "seconds": round(time.time() - t, 1)}
                 print(name, kind, log[f"{name}.{kind}"], flush=True)
         if cfg == args.configs[0]:

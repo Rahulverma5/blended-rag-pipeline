@@ -38,10 +38,12 @@ def chunk_texts(chunks: list[Chunk], corpus: dict[str, str], variant: str) -> li
     raise ValueError(f"unknown text variant {variant!r}")
 
 
-def fingerprint(chunks: list[Chunk], model: str, variant: str) -> str:
-    h = hashlib.sha256(f"{model}|{variant}|{MAX_LEN}".encode())
-    for c in chunks:
-        h.update(f"{c.doc}:{c.start}:{c.end}|".encode())
+def fingerprint(texts: list[str], model: str) -> str:
+    """Hash of the exact encoder inputs, so a change to chunking, titles or the text variant invalidates the cache."""
+    h = hashlib.sha256(f"{model}|{MAX_LEN}".encode())
+    for t in texts:
+        h.update(t.encode())
+        h.update(b"\x00")
     return h.hexdigest()[:16]
 
 

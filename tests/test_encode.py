@@ -10,14 +10,14 @@ CORPUS = {"a.txt": "hello world"}
 
 def test_vectors_round_trip_and_fingerprint_guards_reuse(tmp_path, monkeypatch):
     monkeypatch.setattr(encode, "VECTORS", tmp_path)
-    fp = encode.fingerprint(CHUNKS, encode.DENSE_MODEL, "plain")
+    fp = encode.fingerprint(encode.chunk_texts(CHUNKS, CORPUS, "plain"), encode.DENSE_MODEL)
     dense = np.random.default_rng(0).random((2, 4)).astype(np.float32)
     sparse = sp.csr_matrix(np.array([[0, 1.5, 0], [2.25, 0, 0]], dtype=np.float32))
     encode.save("x", "dense", dense, fp)
     encode.save("x", "sparse", sparse, fp)
     assert np.allclose(encode.load("x", "dense", fp), dense, atol=1e-3)
     assert (encode.load("x", "sparse", fp) != sparse).nnz == 0
-    other = encode.fingerprint(CHUNKS[:1], encode.DENSE_MODEL, "plain")
+    other = encode.fingerprint(encode.chunk_texts(CHUNKS, CORPUS, "contextual"), encode.DENSE_MODEL)
     assert encode.load("x", "dense", other) is None
 
 

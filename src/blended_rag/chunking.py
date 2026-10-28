@@ -12,6 +12,7 @@ Every chunk carries two extra fields used by the multi-field query templates (IB
 
 import re
 from dataclasses import dataclass
+from urllib.parse import unquote
 
 HEADING = re.compile(
     r"(?:^|(?<=\s))(?:ARTICLE|Article)\s+[IVXLC\d]+\b\.?(?:[ \t]+[A-Z][A-Z,&/'-]*\b)*"  # ARTICLE IV  GENERAL UNDERTAKING
@@ -32,8 +33,12 @@ class Chunk:
 
 
 def doc_title(file_path: str) -> str:
+    """Readable document name from a file name: "VELCO%20NDA%20rev0" -> "VELCO NDA rev0",
+    "ExcelerateStandardNDAFormat" -> "Excelerate Standard NDA Format", "Kenway-NDA-Form" -> "Kenway NDA Form"."""
     name = file_path.split("/", 1)[-1].rsplit(".txt", 1)[0].split("||")[0].removesuffix(".pdf")
-    return re.sub(r"[_\s]+", " ", name).strip()
+    name = unquote(name)
+    name = re.sub(r"(?<=[a-z])(?=[A-Z])|(?<=[A-Z])(?=[A-Z][a-z])", " ", name)
+    return re.sub(r"[_\s]+|(?<=\w)-(?=\w)", " ", name).strip()
 
 
 def headings(text: str) -> list[tuple[int, str]]:
