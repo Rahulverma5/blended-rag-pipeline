@@ -73,7 +73,7 @@ def cmd_evaluate(args: argparse.Namespace) -> None:
 
     presets = {"all": list(CONFIGS), "core": CORE, "default": [DEFAULT]}
     names = [n for c in args.configs for n in presets.get(c, [c])]
-    evaluate(names, args.split, args.allow_encode, args.datasets)
+    evaluate(names, args.split, args.allow_encode, args.datasets, label="+".join(args.configs))
 
 
 def cmd_benchmark(args: argparse.Namespace) -> None:

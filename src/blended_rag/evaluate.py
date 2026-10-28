@@ -141,7 +141,8 @@ def markdown(table: dict, title: str) -> str:
     return "\n".join(lines) + "\n"
 
 
-def evaluate(names: list[str], split: str = "mini", allow_encode: bool = False, datasets=None) -> dict:
+def evaluate(names: list[str], split: str = "mini", allow_encode: bool = False, datasets=None,
+             label: str = "custom") -> dict:
     corpus, qs = data.load(split)
     tag = ""
     if datasets:  # development subset: smaller corpus, separate vector cache
@@ -163,8 +164,8 @@ def evaluate(names: list[str], split: str = "mini", allow_encode: bool = False, 
         table = summarise(run(part_cfgs, corpus, part_qs, allow_encode, tag), part_qs)
         report[part] = table
         print(markdown(table, f"{split}{'/' + tag if tag else ''} {part} ({len(part_qs)} queries)"))
-    out = RESULTS / f"{split}{'-' + tag if tag else ''}.json"
+    out = RESULTS / f"{split}{'@' + tag if tag else ''}.{label}.json"  # e.g. mini.core.json, mini.default.json
     out.write_text(json.dumps(report, indent=1))
-    (out.with_suffix(".md")).write_text("\n".join(markdown(t, f"{split} {p}") for p, t in report.items()))
+    out.with_suffix(".md").write_text("\n".join(markdown(t, f"{split} {p}") for p, t in report.items()))
     print(f"wrote {out.relative_to(encode.ROOT)} and .md")
     return report
