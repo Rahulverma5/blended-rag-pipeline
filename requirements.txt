@@ -1,0 +1,8 @@
+# CPU only, no torch. Tested with Python 3.12.
+numpy>=1.26,<3
+scipy>=1.11
+bm25s==0.3.15
+PyStemmer>=2.2
+fastembed==0.9.1
+rapidfuzz>=3.6
+pytest>=7

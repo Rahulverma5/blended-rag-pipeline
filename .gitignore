@@ -5,3 +5,8 @@ venv/
 .env
 node_modules/
 .DS_Store
+
+data/raw/
+artifacts/cache/
+data/models/
+kaggle/bundle.zip
