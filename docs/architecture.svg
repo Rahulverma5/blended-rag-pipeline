@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1180 565" width="1180" height="565" font-family="Helvetica, Arial, sans-serif">
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" fill="#444"/></marker></defs>
+<rect width="1180" height="565" fill="#ffffff"/>
+<rect x="10" y="10" width="1160" height="240" rx="8" fill="#f5f5f5" stroke="#cccccc"/>
+<text x="22" y="32" font-size="13" font-weight="bold" fill="#555">OFFLINE  ·  build once per corpus</text>
+<rect x="10" y="265" width="1160" height="290" rx="8" fill="#eef4fb" stroke="#cccccc"/>
+<text x="22" y="287" font-size="13" font-weight="bold" fill="#555">ONLINE  ·  per question, CPU only (165 ms p50)</text>
+<rect x="690" y="290" width="240" height="205" rx="6" fill="#ffffff" fill-opacity="0.6" stroke="#6c8ebf" stroke-dasharray="4,3"/>
+<text x="810.0" y="310" font-size="12" font-weight="bold" text-anchor="middle" fill="#3a5a8c">Score chunks of routed contract(s)</text>
+<line x1="200" y1="110.0" x2="250" y2="80.0" stroke="#444" stroke-width="1.4" marker-end="url(#a)"/>
+<line x1="200" y1="110.0" x2="250" y2="195.0" stroke="#444" stroke-width="1.4" marker-end="url(#a)"/>
+<line x1="440" y1="80.0" x2="480" y2="80.0" stroke="#444" stroke-width="1.4" marker-end="url(#a)"/>
+<line x1="670" y1="80.0" x2="710" y2="85.0" stroke="#444" stroke-width="1.4" marker-end="url(#a)"/>
+<line x1="345.0" y1="230" x2="355.0" y2="345" stroke="#444" stroke-width="1.4" stroke-dasharray="5,4" marker-end="url(#a)"/>
+<line x1="810.0" y1="135" x2="810.0" y2="290" stroke="#444" stroke-width="1.4" stroke-dasharray="5,4" marker-end="url(#a)"/>
+<line x1="200" y1="400.0" x2="250" y2="400.0" stroke="#444" stroke-width="1.4" marker-end="url(#a)"/>
+<line x1="460" y1="400.0" x2="690" y2="392.5" stroke="#444" stroke-width="1.4" marker-end="url(#a)"/>
+<line x1="930" y1="392.5" x2="965" y2="335.0" stroke="#444" stroke-width="1.4" marker-end="url(#a)"/>
+<line x1="1060.0" y1="375" x2="1060.0" y2="400" stroke="#444" stroke-width="1.4" marker-end="url(#a)"/>
+<line x1="965" y1="450.0" x2="930" y2="526.0" stroke="#444" stroke-width="1.4" stroke-dasharray="5,4" marker-end="url(#a)"/>
+<rect x="30" y="70" width="170" height="80" rx="6" fill="#ffffff" stroke="#666666" stroke-width="1.5"/>
+<text x="115.0" y="101.0" font-size="13" font-weight="bold" text-anchor="middle" fill="#222">Contracts</text>
+<text x="115.0" y="118.0" font-size="11" text-anchor="middle" fill="#444">LegalBench-RAG-mini</text>
+<text x="115.0" y="132.0" font-size="11" text-anchor="middle" fill="#444">72 docs · 8.7M chars</text>
+<rect x="250" y="45" width="190" height="70" rx="6" fill="#fff2cc" stroke="#d6b656" stroke-width="1.5"/>
+<text x="345.0" y="71.0" font-size="13" font-weight="bold" text-anchor="middle" fill="#222">Heading-aware chunker</text>
+<text x="345.0" y="88.0" font-size="11" text-anchor="middle" fill="#444">≤500 chars, no overlap</text>
+<text x="345.0" y="102.0" font-size="11" text-anchor="middle" fill="#444">exact char offsets</text>
+<rect x="250" y="160" width="190" height="70" rx="6" fill="#e1d5e7" stroke="#9673a6" stroke-width="1.5"/>
+<text x="345.0" y="186.0" font-size="13" font-weight="bold" text-anchor="middle" fill="#222">Router index</text>
+<text x="345.0" y="203.0" font-size="11" text-anchor="middle" fill="#444">BM25 over contract</text>
+<text x="345.0" y="217.0" font-size="11" text-anchor="middle" fill="#444">name + first 2k chars</text>
+<rect x="480" y="45" width="190" height="70" rx="6" fill="#fff2cc" stroke="#d6b656" stroke-width="1.5"/>
+<text x="575.0" y="71.0" font-size="13" font-weight="bold" text-anchor="middle" fill="#222">Context prefix</text>
+<text x="575.0" y="88.0" font-size="11" text-anchor="middle" fill="#444">"title | section"</text>
+<text x="575.0" y="102.0" font-size="11" text-anchor="middle" fill="#444">+ chunk text</text>
+<rect x="710" y="35" width="200" height="100" rx="6" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="810.0" y="69.0" font-size="13" font-weight="bold" text-anchor="middle" fill="#222">Encode chunks</text>
+<text x="810.0" y="86.0" font-size="11" text-anchor="middle" fill="#444">bge-small (dense)</text>
+<text x="810.0" y="100.0" font-size="11" text-anchor="middle" fill="#444">SPLADE++ (sparse)</text>
+<text x="810.0" y="114.0" font-size="11" text-anchor="middle" fill="#444">Kaggle T4, ~6 min · 26 MB</text>
+<rect x="30" y="355" width="170" height="90" rx="6" fill="#ffffff" stroke="#666666" stroke-width="1.5"/>
+<text x="115.0" y="384.0" font-size="13" font-weight="bold" text-anchor="middle" fill="#222">Question</text>
+<text x="115.0" y="401.0" font-size="11" text-anchor="middle" fill="#444">"Consider the merger</text>
+<text x="115.0" y="415.0" font-size="11" text-anchor="middle" fill="#444">between X and Y; where</text>
+<text x="115.0" y="429.0" font-size="11" text-anchor="middle" fill="#444">is the No-Shop clause?"</text>
+<rect x="250" y="345" width="210" height="110" rx="6" fill="#e1d5e7" stroke="#9673a6" stroke-width="1.5"/>
+<text x="355.0" y="377.0" font-size="13" font-weight="bold" text-anchor="middle" fill="#222">1 · Route: which contract?</text>
+<text x="355.0" y="394.0" font-size="11" text-anchor="middle" fill="#444">max idf of name word in query</text>
+<text x="355.0" y="408.0" font-size="11" text-anchor="middle" fill="#444">+ preamble BM25</text>
+<text x="355.0" y="422.0" font-size="11" text-anchor="middle" fill="#444">top-1 correct 99.6%</text>
+<text x="355.0" y="436.0" font-size="11" text-anchor="middle" fill="#444">keeps ≤3 close contracts</text>
+<rect x="710" y="325" width="200" height="70" rx="6" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="810.0" y="351.0" font-size="13" font-weight="bold" text-anchor="middle" fill="#222">Dense scorer</text>
+<text x="810.0" y="368.0" font-size="11" text-anchor="middle" fill="#444">bge-small cosine</text>
+<text x="810.0" y="382.0" font-size="11" text-anchor="middle" fill="#444">(query encoded on CPU, ONNX)</text>
+<rect x="710" y="410" width="200" height="70" rx="6" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="810.0" y="436.0" font-size="13" font-weight="bold" text-anchor="middle" fill="#222">SPLADE scorer</text>
+<text x="810.0" y="453.0" font-size="11" text-anchor="middle" fill="#444">learned term weights</text>
+<text x="810.0" y="467.0" font-size="11" text-anchor="middle" fill="#444">sparse dot product</text>
+<rect x="965" y="295" width="190" height="80" rx="6" fill="#d5e8d4" stroke="#82b366" stroke-width="1.5"/>
+<text x="1060.0" y="333.0" font-size="13" font-weight="bold" text-anchor="middle" fill="#222">2 · Rank: RRF fusion</text>
+<text x="1060.0" y="350.0" font-size="11" text-anchor="middle" fill="#444">Σ 1 / (60 + rank)</text>
+<rect x="965" y="400" width="190" height="100" rx="6" fill="#d5e8d4" stroke="#82b366" stroke-width="1.5"/>
+<text x="1060.0" y="434.0" font-size="13" font-weight="bold" text-anchor="middle" fill="#222">Top-k cited spans</text>
+<text x="1060.0" y="451.0" font-size="11" text-anchor="middle" fill="#444">doc · char offsets · section</text>
+<text x="1060.0" y="465.0" font-size="11" text-anchor="middle" fill="#444">R@64 81.9 · P@1 13.5</text>
+<text x="1060.0" y="479.0" font-size="11" text-anchor="middle" fill="#444">optional: ask --llm claude</text>
+<rect x="560" y="507" width="370" height="38" rx="6" fill="#f8cecc" stroke="#b85450" stroke-width="1.5"/>
+<text x="745.0" y="524.0" font-size="13" font-weight="bold" text-anchor="middle" fill="#222">Evaluation</text>
+<text x="745.0" y="541.0" font-size="11" text-anchor="middle" fill="#444">char-level P@k / R@k vs gold spans · dev/test split by document</text>
+<text x="250" y="478" font-size="11" font-style="italic" fill="#9673a6">BM25 + IBM templates do routing only:</text>
+<text x="250" y="492" font-size="11" font-style="italic" fill="#9673a6">removing BM25 from ranking gave +2.7 R@8</text>
+</svg>

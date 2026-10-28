@@ -23,11 +23,9 @@ We use the **mini** subset: 776 questions over 72 documents (8.7M characters). I
 
 ## 3. Model architecture
 
-```
-question ─► ROUTE: which contract?   ─► RANK: which clause?               ─► top-k cited spans
-            BM25 over contract name      dense (bge-small)  ─┐              (doc, char offsets,
-            + preamble                   SPLADE++ (sparse)  ─┴─ RRF fusion   section heading)
-```
+![Architecture](architecture.svg)
+
+*Editable source: [architecture.drawio](architecture.drawio) (open in app.diagrams.net); regenerate with `python docs/make_diagram.py`.*
 
 **Chunking.** Contracts are cut at section headings into pieces of at most 500 characters, with no overlap and exact offsets. Each chunk is encoded with a `contract title | section heading` prefix, so it carries its context.
 
@@ -110,5 +108,5 @@ src/blended_rag/      data, chunking, indexes/ (BM25, dense, SPLADE), queries (I
                       routing, fusion, encode, pipeline, metrics, evaluate
 kaggle/               GPU encoding script            data/mini/       committed corpus + 776 questions
 artifacts/vectors/    default-config vectors         artifacts/results/  ablation tables, CPU benchmark
-tests/                35 tests, offline end-to-end   docs/            this write-up
+tests/                35 tests, offline end-to-end   docs/            write-up + diagram
 ```
