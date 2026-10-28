@@ -44,13 +44,23 @@ CONFIGS = {c.name: c for c in [
     Config("dense+route", **_D),
     Config("rrf-all+route"),
     Config("wsum-all+route", fusion="wsum"),
+    # leave-one-out: what each retriever adds to the routed blend
+    Config("rrf-all+route-bm25", bm25=None),  # = the default: BM25 routes, dense + SPLADE rank clauses
+    Config("rrf-all+route-dense", dense=False),
+    Config("rrf-all+route-splade", splade=False),
     # chunking / text variant
     Config("rrf-all+route@naive500-plain", chunking="naive", variant="plain"),
     Config("rrf-all+route@structure500-plain", variant="plain"),
     Config("rrf-all+route@structure800", max_chars=800),
     Config("dense@naive500-plain", chunking="naive", variant="plain", route=False, **_D),  # ~ paper's baseline
 ]}
-DEFAULT = "rrf-all+route"
+# Chosen on dev (R@8 45.5 vs 43.6 for all three retrievers); on test +2.7 R@8, paired bootstrap p = 0.002.
+DEFAULT = "rrf-all+route-bm25"
+# One row per claim in the write-up: baselines, IBM template, blending, routing, per-retriever leave-one-out,
+# chunking / paper baseline.
+CORE = ["bm25-match", "bm25-most", "dense", "splade", "ibm-se-best", "rrf-all", "rrf-all+route", "dense+route",
+        "rrf-all+route-bm25", "rrf-all+route-dense", "rrf-all+route-splade",
+        "dense@naive500-plain", "rrf-all+route@naive500-plain"]
 WEIGHT_GRID = (0.0, 0.5, 1.0, 2.0)
 
 

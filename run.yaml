@@ -4,16 +4,14 @@
 
 setup_commands:
   - "pip install -r requirements.txt"
-  # - add every other setup step here, in order (env vars, downloads, etc.)
+  - "python src/main.py download"
 
 run_commands:
-  - "python src/main.py --help"
-  # - the real command(s) that actually run your solution
+  - "python src/main.py index"
+  - "python src/main.py evaluate --configs default"
+  - "python src/main.py search \"Consider the Acquisition Agreement between Parent 'BridgeBio Pharma, Inc.' and Target 'Eidos Therapeutics, Inc.'; Where is the No-Shop Clause\" -k 3"
 
-test_commands: []
-  # optional -- commands that run your own tests/checks, if you have any
+test_commands:
+  - "pytest -q"
 
-notes: ""
-  # anything we should know before running this (e.g. "needs a GPU",
-  # "takes about 10 minutes", "expects a sample dataset already present
-  # under data/, see docs/ for where to get it")
+notes: "CPU only, no GPU or API key. `download` fetches two ONNX models (~650 MB, public Hugging Face). The LegalBench-RAG-mini corpus and the default config's chunk vectors are committed (precomputed on a Kaggle T4, see kaggle/README.md), so no data download or chunk encoding is needed. `evaluate` encodes the 776 queries on CPU (~1-2 min) and prints the results table. Total about 5-10 minutes. Full ablation: `python src/main.py evaluate --configs core` (needs the other vectors from kaggle/encode.py)."

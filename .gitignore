@@ -12,3 +12,8 @@ data/models/
 kaggle/bundle.zip
 artifacts/results/mini-*.json
 artifacts/results/mini-*.md
+# only the default config's vectors are committed (dense + SPLADE, structure500-contextual)
+artifacts/vectors/*
+!artifacts/vectors/structure500-contextual.dense.npy
+!artifacts/vectors/structure500-contextual.sparse.npz
+!artifacts/vectors/fingerprints.json

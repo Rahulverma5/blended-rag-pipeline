@@ -69,7 +69,10 @@ def cmd_ask(args: argparse.Namespace) -> None:
 def cmd_evaluate(args: argparse.Namespace) -> None:
     from blended_rag.evaluate import evaluate
 
-    names = list(CONFIGS) if args.configs == ["all"] else [DEFAULT if n == "default" else n for n in args.configs]
+    from blended_rag.evaluate import CORE
+
+    presets = {"all": list(CONFIGS), "core": CORE, "default": [DEFAULT]}
+    names = [n for c in args.configs for n in presets.get(c, [c])]
     evaluate(names, args.split, args.allow_encode, args.datasets)
 
 
@@ -126,7 +129,7 @@ def main() -> None:
 
     p = sub.add_parser("evaluate", help="ablation table on the dev/test split (artifacts/results/)")
     p.add_argument("--split", default="mini", choices=["mini", "full"])
-    p.add_argument("--configs", nargs="+", default=["default"], help="names, 'default' or 'all'")
+    p.add_argument("--configs", nargs="+", default=["default"], help="config names, or presets: default, core, all")
     p.add_argument("--datasets", nargs="+", choices=list(data.DATASETS), help="evaluate on a subset only")
     p.add_argument("--allow-encode", action="store_true", help="encode missing chunk vectors on CPU (slow)")
     p.set_defaults(func=cmd_evaluate)

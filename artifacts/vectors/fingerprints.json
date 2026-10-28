@@ -1,0 +1,13 @@
+{
+ "naive500-contextual.dense": "aba5ddc4c8c6cce4",
+ "naive500-contextual.sparse": "7b113b3f2cc7653c",
+ "naive500-plain.dense": "f5bab9f67744647f",
+ "naive500-plain.sparse": "64ce4e87f0797b0e",
+ "structure500-contextual.dense": "3d2616c0f5b30c07",
+ "structure500-contextual.sparse": "ad8945cde638a427",
+ "structure500-contextual@privacy_qa.dense": "3204f8908883394b",
+ "structure500-contextual@privacy_qa.sparse": "2eb7a653e322fd54",
+ "structure500-plain.dense": "cb1152efc5b7a4a0",
+ "structure500-plain.sparse": "1206e7d7daf0753c",
+ "structure800-plain.dense": "7e10944b97fe4c48"
+}
