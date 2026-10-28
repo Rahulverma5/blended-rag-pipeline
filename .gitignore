@@ -10,3 +10,5 @@ data/raw/
 artifacts/cache/
 data/models/
 kaggle/bundle.zip
+artifacts/results/mini-*.json
+artifacts/results/mini-*.md

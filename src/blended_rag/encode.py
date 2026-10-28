@@ -66,10 +66,14 @@ def save(name: str, kind: str, vectors, fp: str) -> None:
     meta.write_text(json.dumps(fps, indent=1, sort_keys=True))
 
 
+def has(name: str, kind: str, fp: str) -> bool:
+    meta = VECTORS / "fingerprints.json"
+    return meta.exists() and json.loads(meta.read_text()).get(f"{name}.{kind}") == fp and _path(name, kind).exists()
+
+
 def load(name: str, kind: str, fp: str):
     """Cached vectors, or None if missing or built from different chunks / model / variant."""
-    meta = VECTORS / "fingerprints.json"
-    if not meta.exists() or json.loads(meta.read_text()).get(f"{name}.{kind}") != fp or not _path(name, kind).exists():
+    if not has(name, kind, fp):
         return None
     if kind == "dense":
         return np.load(_path(name, kind)).astype(np.float32)
@@ -110,7 +114,8 @@ class FastEmbedEncoder:
         return self.encode_dense([QUERY_PREFIX + q for q in queries])
 
     def query_sparse(self, queries: list[str]) -> sp.csr_matrix:
-        return _sparse_rows(list(self.sparse.query_embed(queries)), SPARSE_DIM)
+        # query_embed batches 256 at a time (256 x tokens x 30522 floats): that swapped for an hour, then OOM.
+        return _sparse_rows(list(self.sparse.embed(queries, batch_size=4)), SPARSE_DIM)
 
 
 # ---------------------------------------------------------------- torch (Kaggle GPU)
